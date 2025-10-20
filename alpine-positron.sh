@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#SBATCH --job-name=positron
+#SBATCH --job-name=positron-%j
 #SBATCH --ntasks=1
 #SBATCH --time=08:00:00
 #SBATCH --mem=20gb
@@ -29,6 +29,7 @@ Host positron-alpine-${SLURM_JOB_ID}
     HostName ${NODE_HOSTNAME}
     User ${USER}
     ProxyJump ${USER}@login-ci.rc.colorado.edu
+    ForwardAgent yes
 
 2. In Positron: Cmd/Ctrl+Shift+P → "Remote-SSH: Connect to Host"
    Select: positron-alpine-${SLURM_JOB_ID}
