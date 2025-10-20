@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --time=08:00:00
 #SBATCH --mem=20gb
-#SBATCH --output=logs/positron.out
+#SBATCH --output=logs/positron-%j.out
 #SBATCH --partition=amilan
 #SBATCH --qos=normal
 
@@ -13,7 +13,7 @@ mkdir -p logs
 # Get the compute node hostname
 NODE_HOSTNAME=$(hostname)
 
-cat 1>&2 <<END
+cat <<END
 ========================================
 Positron Remote SSH Connection Info
 ========================================
@@ -25,13 +25,13 @@ CONNECT FROM POSITRON:
 
 1. Add to your local ~/.ssh/config:
 
-Host positron-${SLURM_JOB_ID}
+Host positron-alpine-${SLURM_JOB_ID}
     HostName ${NODE_HOSTNAME}
     User ${USER}
     ProxyJump ${USER}@login-ci.rc.colorado.edu
 
 2. In Positron: Cmd/Ctrl+Shift+P → "Remote-SSH: Connect to Host"
-   Select: positron-${SLURM_JOB_ID}
+   Select: positron-alpine-${SLURM_JOB_ID}
 
 3. Positron will install itself on the remote node automatically
 
