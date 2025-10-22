@@ -122,4 +122,5 @@ Adjust these parameters based on your computational requirements. See [Alpine do
 
 - [Alpine Documentation](https://curc.readthedocs.io/en/latest/compute/alpine.html)
 - [Positron Documentation](https://github.com/posit-dev/positron)
+- [Positron Remote SSH Documentation](https://positron.posit.co/remote-ssh.html)
 - [CU Research Computing Support](https://curc.readthedocs.io/)
