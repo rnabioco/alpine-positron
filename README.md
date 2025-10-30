@@ -57,25 +57,27 @@ This allows your local machine to authenticate with Alpine compute nodes via the
    ```
 
 3. **View connection instructions:**
+   
    ```bash
    cat logs/positron-<JOB_ID>.out
    ```
+   
    Replace `<JOB_ID>` with your actual job ID from `squeue`.
 
-4. **Add SSH config to your local machine:**
-
-   Copy the SSH config block from the log file and add it to your `~/.ssh/config` on your local machine. It will look like:
+5. **Connect from Positron:**
+   - Open Positron on your local machine
+   - Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+   - Select "Remote-SSH: Open SSH Configuration File"
+   - Paste in your SSH config and save:
+  
    ```
    Host positron-<JOB_ID>
        HostName <compute-node>
        User <your-username>
        ProxyJump <your-username>@login-ci.rc.colorado.edu
    ```
-
-5. **Connect from Positron:**
-   - Open Positron on your local machine
-   - Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
-   - Select "Remote-SSH: Connect to Host"
+   
+   - Then select "Remote-SSH: Connect to Host"
    - Choose `positron-<JOB_ID>` from the list
    - Positron will install itself on the remote node automatically
 
