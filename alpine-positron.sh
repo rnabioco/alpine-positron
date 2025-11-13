@@ -8,6 +8,7 @@
 #SBATCH --output=logs/positron-%j.out
 #SBATCH --partition=amilan
 #SBATCH --qos=normal
+#SBATCH --comment="positron-%j"
 #SBATCH --export=ALL,POSITRON_SLURM_EXEC=true
 
 # Colors
