@@ -14,7 +14,7 @@ This SLURM batch script allocates a compute node on Alpine and provides SSH conn
 
 ## Setup (One-time)
 
-### Add your local machine's SSH key to Alpine
+### 1. Add your local machine's SSH key to Alpine
 
 If you haven't already, you need to add your local machine's public SSH key to Alpine's authorized_keys file. This allows your local machine to authenticate with Alpine compute nodes via the ProxyJump connection.
 
@@ -41,6 +41,25 @@ If you haven't already, you need to add your local machine's public SSH key to A
    ```
 
    Replace `your-public-key-content` with the output from step 1.
+
+### 2. Configure Positron Server location on Alpine
+
+By default, Positron installs its server components to `~/.positron-server`, but `$HOME` on Alpine has limited space. To avoid filling up your home directory, set up Positron Server on `/scratch/alpine`:
+
+**On Alpine** (login or compute node):
+```bash
+# Create directory on scratch (larger allocation)
+mkdir -p /scratch/alpine/${USER}/.positron-server
+
+# Create symlink from home to scratch
+ln -s /scratch/alpine/${USER}/.positron-server ~/.positron-server
+```
+
+**Important notes:**
+- `/scratch/alpine` is purged every 90 days of files not accessed
+- If the directory is purged, Positron will automatically reinstall the server when you next connect
+- You may need to recreate the symlink if it's removed: `ln -s /scratch/alpine/${USER}/.positron-server ~/.positron-server`
+- For more details on how Positron Remote-SSH works, see: https://positron.posit.co/remote-ssh.html#how-it-works-troubleshooting
 
 ## Quick Start
 
